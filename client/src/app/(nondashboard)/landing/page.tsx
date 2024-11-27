@@ -69,13 +69,17 @@ const Landing = () => {
           {[
             "web development",
             "cloud computing",
-            "cloud computing",
-            "web develpoment",
+            "java backend",
+            "information retrieval",
           ].map((tag, index) => (
             <span key={index} className="landing__tag">
               {tag}
             </span>
           ))}
+        </div>
+
+        <div className="landing__courses">
+            {/* courses here */}
         </div>
       </motion.div>
     </motion.div>
