@@ -11,8 +11,8 @@ export const useCarousel = ({
 }: UseCarouselProps) => {
   const [currentImage, setCurrentImage] = useState(0); //start with the first image
 
+  // cycle between images
   useEffect(() => {
-    // cycle between images
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % totalImages);
     }, interval);
