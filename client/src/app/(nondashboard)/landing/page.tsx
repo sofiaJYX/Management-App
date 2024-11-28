@@ -26,7 +26,13 @@ const LoadingSkeleton = () => {
 
                 <div className="landing-skeleton__tags">
                     {[1,2,3,4,5].map((_, index) => (
-                        <Skeleton key={index} className="landing-skeleton__title" />
+                        <Skeleton key={index} className="landing-skeleton__tag" />
+                    ))}
+                </div>
+
+                <div className="landing-skeleton__courses">
+                    {[1,2,3,4,5].map((_, index) => (
+                        <Skeleton key={index} className="landing-skeleton__course-card" />
                     ))}
                 </div>
             </div>

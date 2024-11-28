@@ -20,10 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${dmSans.className}`}
-      >
-        {children}
+      <body className={`${dmSans.className}`}>
+        <Providers>
+          {children}
+        </Providers>
+        
       </body>
     </html>
   );
