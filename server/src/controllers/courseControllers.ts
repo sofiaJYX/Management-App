@@ -10,7 +10,6 @@ export const listCourses = async(
         const courses = category && category !== "all"
         ? await Course.scan("category").eq(category).exec() // filter based on category
         : await Course.scan().exec(); // if doesnt exist get the entire course database
-        
         res.json({message: "Courses retrieved success", data: courses});
     } catch(error) {
         res.status(500).json({message: "Error", error});
