@@ -14,6 +14,9 @@
   "description": "",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.699.0",
+    "@clerk/clerk-js": "^5.38.0",
+    "@clerk/nextjs": "^6.7.0",
+    "@reduxjs/toolkit": "^2.4.0",
     "aws-sdk": "^2.1692.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
@@ -21,8 +24,12 @@
     "dynamoose": "^4.0.2",
     "express": "^4.21.1",
     "helmet": "^8.0.0",
+    "install": "^0.13.0",
     "morgan": "^1.10.0",
+    "npm": "^10.9.2",
     "pluralize": "^8.0.0",
+    "sonner": "^1.7.0",
+    "sooner": "^1.1.4",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
