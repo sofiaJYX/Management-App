@@ -4,33 +4,42 @@ import { User } from "@clerk/nextjs/server";
 import { Clerk } from "@clerk/clerk-js";
 import { toast } from "sonner";
 
-// const customBaseQuery = async (
-//   args: string | FetchArgs,
-//   api: BaseQueryApi,
-//   extraOptions: any
-// ) => {
-//   const baseQuery = fetchBaseQuery({
-//     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
-//     prepareHeaders: async (headers) => {
-//       const token = await window.Clerk?.session?.getToken();
-//       if (token) {
-//         headers.set("Authorization", `Bearer ${token}`);
-//       }
-//       return headers;
-//     },
-//   });
+const customBaseQuery = async (
+  args: string | FetchArgs,
+  api: BaseQueryApi,
+  extraOptions: any
+) => {
+  const baseQuery = fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    prepareHeaders: async (headers) => {
+      const token = await window.Clerk?.session?.getToken();
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  });
 
-//   try {
-//     const result: any = await baseQuery(args, api, extraOptions);
+  try {
+    const result: any = await baseQuery(args, api, extraOptions);
 
-//     if (result.error) {
-//       const errorData = result.error.data;
-//       const errorMessage =
-//         errorData?.message ||
-//         result.error.status.toString() ||
-//         "An error occurred";
-//       toast.error(`Error: ${errorMessage}`);
-//     }
+    if (result.data) {
+      result.data = result.data.data;
+    }
+
+    return result;
+    // if (result.error) {
+    //   const errorData = result.error.data;
+    //   const errorMessage =
+    //     errorData?.message ||
+    //     result.error.status.toString() ||
+    //     "An error occurred";
+    //   toast.error(`Error: ${errorMessage}`);
+    // }
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    return { error: {status: "Fetch_error", error: errorMessage}};
+  }
 
 //     const isMutationRequest =
 //       (args as FetchArgs).method && (args as FetchArgs).method !== "GET";
@@ -56,10 +65,11 @@ import { toast } from "sonner";
 
 //     return { error: { status: "FETCH_ERROR", error: errorMessage } };
 //   }
-// };
+};
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
+  //baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
+  baseQuery: customBaseQuery,
   reducerPath: "api",
   tagTypes: ["Courses", "Users", "UserCourseProgress"], //data get are saved into tags
   endpoints: (build) => ({
@@ -84,7 +94,7 @@ export const api = createApi({
     */
     getCourses: build.query<Course[], { category?: string }>({
       query: ({ category }) => ({
-        url: "courses",
+        url: "courses",  //this url is tacked on baseUrl "NEXT_PUBLIC_API_BASE_URL"
         params: { category },
       }),
       providesTags: ["Courses"],
