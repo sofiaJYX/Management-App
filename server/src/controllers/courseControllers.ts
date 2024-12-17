@@ -16,6 +16,7 @@ export const listCourses = async(
     }
 };
 
+// get a single course
 export const getCourse = async(
     req: Request,
     res: Response

@@ -36,7 +36,6 @@ const NonDashboardNavbar = () => {
         </button>
 
         {/* Sign in buttons */}
-
       </div>
     </nav>
   );
