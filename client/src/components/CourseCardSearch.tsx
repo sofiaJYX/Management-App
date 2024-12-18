@@ -1,6 +1,6 @@
-import React from "react";
 import { formatPrice } from "@/lib/utils";
 import Image from "next/image";
+import React from "react";
 
 const CourseCardSearch = ({
   course,
@@ -28,10 +28,10 @@ const CourseCardSearch = ({
       </div>
       <div className="course-card-search__content">
         <div>
-            <h2 className="course-card-search__title">{course.title}</h2>
-            <p className="course-card-search__description">
-                {course.description}
-            </p>
+          <h2 className="course-card-search__title">{course.title}</h2>
+          <p className="course-card-search__description">
+            {course.description}
+          </p>
         </div>
         <div className="mt-2">
           <p className="course-card-search__teacher">By {course.teacherName}</p>
@@ -43,7 +43,7 @@ const CourseCardSearch = ({
               {course.enrollments?.length} Enrolled
             </span>
           </div>
-          </div>
+        </div>
       </div>
     </div>
   );

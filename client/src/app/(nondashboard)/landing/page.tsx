@@ -77,7 +77,7 @@ const Landing = () => {
             Courses when you need them and want them.
           </p>
           <div className="landing__cta">
-            <Link href="/sesrch">
+            <Link href="/search">
               <div className="landing__cta-button">Search for Courses</div>
             </Link>
           </div>
