@@ -54,7 +54,7 @@ const Search = () => {
     >
       <h1 className="search__title">List of available courses</h1>
       <h2 className="search__subtitle">{courses.length} courses avaiable</h2>
-      {/* <div className="search__content">
+      <div className="search__content">
         <motion.div
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -84,7 +84,7 @@ const Search = () => {
             />
           </motion.div>
         )}
-      </div> */}
+      </div>
     </motion.div>
   );
 };
