@@ -20,6 +20,7 @@ const AccordionSections = ({ sections }: AccordionSectionsProps) => {
             <h5 className="accordion-section__title">{section.sectionTitle}</h5>
           </AccordionTrigger>
 
+            {/* opening of the accordion */}
           <AccordionContent className="accordion-section__content">
             <ul>
               {section.chapters.map((chapter) => (
