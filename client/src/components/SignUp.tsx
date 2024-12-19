@@ -1,9 +1,9 @@
-import { SignIn } from "@clerk/nextjs";
+import { SignUp } from "@clerk/nextjs";
 import React from "react";
 
-const SignInComponent = () => {
+const SignUpComponent = () => {
   return (
-    <SignIn
+    <SignUp
       appearance={{
         elements: {
             // change button color to purple
@@ -15,4 +15,4 @@ const SignInComponent = () => {
   );
 };
 
-export default SignInComponent;
+export default SignUpComponent;
