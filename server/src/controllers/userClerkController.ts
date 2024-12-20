@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { clerkClient } from "../index";
 
-// get a single course
+// update user data
 export const updateUser = async(
     req: Request,
     res: Response

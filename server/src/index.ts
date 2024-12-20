@@ -9,6 +9,7 @@ import * as dynamoose from "dynamoose";
 /* Route import */
 import courseRoutes from "./routes/courseRoutes";
 import { createClerkClient } from "@clerk/express";
+import userClerkRoutes from "./routes/userClerkRoutes";
 
 /* Configs */
 dotenv.config();
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 }); 
 
 app.use("/courses", courseRoutes);
+app.use("/users/clerk", userClerkRoutes);
 
 /* server */
 const port = process.env.PORT || 3000;
