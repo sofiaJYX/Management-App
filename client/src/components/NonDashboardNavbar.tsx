@@ -9,10 +9,7 @@ const NonDashboardNavbar = () => {
   const { user } = useUser();
   const userRole = user?.publicMetadata?.userType as "student" | "teacher";
 
-  console.log(
-    "user?.publicMetadata?.userType: ", user?.publicMetadata?.userType
-  )
-  console.log("Hi1");
+
   return (
     <nav className="nondashboard-navbar">
       <div className="nondashboard-navbar__container">
