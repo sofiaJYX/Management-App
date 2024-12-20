@@ -8,6 +8,7 @@ import * as dynamoose from "dynamoose";
 
 /* Route import */
 import courseRoutes from "./routes/courseRoutes";
+import { createClerkClient } from "@clerk/express";
 
 /* Configs */
 dotenv.config();
@@ -18,6 +19,11 @@ const isProduction = process.env.NODE_ENV === "production";
 if (!isProduction) {
     dynamoose.aws.ddb.local();
 }
+
+// connect to clerk api
+export const clerkClient = createClerkClient({
+    secretKey: process.env.CLERK_SECRET_KEY,
+})
 
 const app = express();
 app.use(express.json());
