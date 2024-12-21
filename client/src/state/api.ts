@@ -76,16 +76,17 @@ export const api = createApi({
     /* 
     ===============
     USER CLERK
+    build.mutation - update
     =============== 
     */
-    // updateUser: build.mutation<User, Partial<User> & { userId: string }>({
-    //   query: ({ userId, ...updatedUser }) => ({
-    //     url: `users/clerk/${userId}`,
-    //     method: "PUT",
-    //     body: updatedUser,
-    //   }),
-    //   invalidatesTags: ["Users"],
-    // }),
+    updateUser: build.mutation<User, Partial<User> & { userId: string }>({
+      query: ({ userId, ...updatedUser }) => ({
+        url: `users/clerk/${userId}`,
+        method: "PUT",
+        body: updatedUser,
+      }),
+      invalidatesTags: ["Users"], // everytime when update a user, re-fetch all users
+    }),
 
     /* 
     ===============
@@ -244,7 +245,7 @@ export const api = createApi({
 });
 
 export const {
-  // useUpdateUserMutation,
+  useUpdateUserMutation,
   useCreateCourseMutation,
   useUpdateCourseMutation,
   useDeleteCourseMutation,
