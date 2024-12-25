@@ -1,8 +1,10 @@
 "use client";
 
+import CoursePreview from "@/src/components/CoursePreview";
 import Loading from "@/src/components/Loading";
+import SignInComponent from "@/src/components/SignIn";
+import SignUpComponent from "@/src/components/SignUp";
 import { useCurrentCourse } from "@/src/hooks/useCurrentCourse";
-import { useGetCourseQuery } from "@/src/state/api";
 import { useSearchParams } from "next/navigation"
 import React from 'react'
 
@@ -16,7 +18,19 @@ const CheckoutDetailsPage = () => {
     if (!selectedCourse) return <div>Course not found</div>
 
   return (
-    <div>index</div>
+    <div className="checkout-details">
+        <div className="checkout-details__container">
+          <div className="checkout-details__preview">
+            <CoursePreview course={selectedCourse} />
+          </div>
+
+          <div className="checkout-details__auth">
+            { showSignUp ? <SignUpComponent /> : <SignInComponent />}
+        </div>
+        
+        </div>
+
+    </div>
   )
 }
 
