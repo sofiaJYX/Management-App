@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import React from "react";
@@ -40,13 +42,15 @@ const WizardStepper = ({ currentStep }: WizardStepperProps) => {
                 {step === 3 && "Completion"}
               </p>
             </div>
-
+            
             {index < 2 && (
+              // check if it's completed
               <div
                 className={cn("wizard-stepper__line", {
                   "wizard-stepper__line--completed": currentStep > step,
                   "wizard-stepper__line--incomplete": currentStep <= step,
                 })}
+                
               />
             )}
           </React.Fragment>

@@ -18,17 +18,18 @@ export const useCheckoutNavigation = () => {
       const showSignUp = isSignedIn ? "true" : "false";
 
       router.push(
-        `/checkout?step=${newStep}&id=${courseId}&showSignUp=${showSignUp}`,
+        `/checkout?step=${newStep}&id=${courseId}&showSignUp=${showSignUp}`, // obtain user's sign in state
         {
           scroll: false,
         }
       );
     },
-    [courseId, isSignedIn, router]
+    [courseId , isSignedIn, router]
   );
 
+  // navigate user to step
   useEffect(() => {
-    if (isLoaded && !isSignedIn && checkoutStep > 1) {
+    if (isLoaded && !isSignedIn && checkoutStep > 1) { // check if user is loaded & signed in
       navigateToStep(1);
     }
   }, [isLoaded, isSignedIn, checkoutStep, navigateToStep]);
