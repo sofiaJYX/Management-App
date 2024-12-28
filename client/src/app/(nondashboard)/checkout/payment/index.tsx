@@ -8,6 +8,7 @@ import { useClerk, useUser } from "@clerk/nextjs";
 import CoursePreview from "@/src/components/CoursePreview";
 import { Button } from "@/src/components/ui/button";
 import { CreditCard } from "lucide-react";
+import { toast } from "sonner";
 
 const PaymentPageContent = () => {
     const stripe = useStripe();
@@ -17,6 +18,42 @@ const PaymentPageContent = () => {
     const { course, courseId } = useCurrentCourse();
     const { user } = useUser();
     const { signOut } = useClerk();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (!stripe || !elements) {
+        toast.error("Stripe is not available");
+        return;
+      }
+
+      const result = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+        return_url: `${process.env.NEXT_PUBLIC_STRIPE_REDIRECT_URL}?id=${courseId}`,
+        },
+        redirect: "if_required",
+      });
+
+      // if payment is successed, create transaction
+      if (result.paymentIntent?.status == "succeeded") {
+        const transactionData: Partial<Transaction> = {
+          transactionId: result.paymentIntent.id,
+          userId: user?.id,
+          courseId: courseId,
+          paymentProvider: "stripe",
+          amount: course?.price || 0
+        }
+
+        await createTransaction(transactionData),
+        navigateToStep(3);
+      }
+    }
+
+    const handleSignOutAndNavigate = async() => {
+      await signOut();
+      navigateToStep(1);
+    }
 
     if(!course) return null;
 
@@ -33,7 +70,7 @@ const PaymentPageContent = () => {
         <div className="payment__form-container">
           <form
             id="payment-form"
-            //onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className="payment__form"
           >
             <div className="payment__content">
@@ -64,7 +101,7 @@ const PaymentPageContent = () => {
       <div className="payment__actions">
         <Button
           className="hover:bg-white-50/10"
-          //onClick={handleSignOutAndNavigate}
+          onClick={handleSignOutAndNavigate}
           variant="outline"
           type="button"
         >
