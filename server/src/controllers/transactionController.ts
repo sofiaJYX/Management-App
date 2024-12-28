@@ -43,3 +43,59 @@ export const createStripePaymentIntent = async (
         res.status(500).json({message: "Error creating stripe payment intent", error});
     }
 };
+
+export const createTranscationPaymentIntent = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    const { userId, courseId, transcationId, amount, paymentProvider} = req.body;
+   
+    try{
+        // 1. get course info
+        const course = await Course.get(courseId);
+
+        // 2. create trans record
+        const newTranscation = new Transaction({
+            dateTime: new Date().toISOString(),
+            userId,
+            courseId,
+            transcationId,
+            amount,
+            paymentProvider
+        })
+        await newTranscation.save();
+
+        // create user course progress
+        const initialProgress = new UserCourseProgress({
+            userId,
+            courseId,
+            enrollmentData: new Date().toISOString(),
+            overallProgress: 0,
+            sections: course.sections.map((section: any) => ({
+                sectionId: section.sectionId,
+                chapters: section.chapters.map((chapter: any) => ({
+                    chapterId: chapter.chapterId,
+                    completed: false
+                }))
+            })),
+            lastAccessedTimestamp: new Date().toISOString()
+        })
+        await initialProgress.save();
+
+        // add enrollment to the specific course
+        await Course.update(
+            {courseId},
+            {
+                $ADD: {
+                    enrollments: [{ userId }],
+                },
+            }
+        )
+
+        res.json({message: "", data: {
+            clientSecret: paymentIntent.client_secret,
+        }});
+    } catch(error) {
+        res.status(500).json({message: "Error creating stripe payment intent", error});
+    }
+};
