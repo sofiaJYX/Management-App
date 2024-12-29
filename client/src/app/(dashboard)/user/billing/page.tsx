@@ -78,6 +78,7 @@ const UserBilling = () => {
                   </TableHead>
                 </TableRow>
               </TableHeader>
+              
               <TableBody className="billing__table-body">
                 {filteredData.length > 0 ? (
                   filteredData.map((transaction) => (
