@@ -8,8 +8,8 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/src/lib/utils";
-import { useSidebar } from "@/components/ui/sidebar";
-import Loading from "@/components/Loading";
+import { useSidebar } from "@/src/components/ui/sidebar";
+import Loading from "@/src/components/Loading";
 import { useCourseProgressData } from "@/src/hooks/useCourseProgressData";
 
 const ChaptersSidebar = () => {

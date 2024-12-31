@@ -6,18 +6,19 @@ import { useRouter } from "next/navigation";
 import React, { useMemo, useState } from 'react';
 import Header from "@/src/components/Header";
 import Loading from "@/src/components/Loading";
-//import TeacherCourseCard from "@/src/components/TeacherCourseCard";
+import TeacherCourseCard from "@/src/components/TeacherCourseCard";
 import Toolbar from "@/src/components/Toolbar";
 import { Button } from "@/src/components/ui/button";
 
 const Courses = () => {
     const router = useRouter();
-    const user = useUser();
+    const { user } = useUser();
     const {
-        data: courses,
-        isLoading,
-        isError,
+      data: courses,
+      isLoading,
+      isError,
     } = useGetCoursesQuery({ category: "all" });
+  
 
     const [createCourse] = useCreateCourseMutation();
     const [deleteCourse] = useDeleteCourseMutation();
@@ -79,7 +80,7 @@ const Courses = () => {
             onSearch={setSearchTerm}
             onCategoryChange={setSelectedCategory}
           />
-          {/* <div className="teacher-courses__grid">
+          <div className="teacher-courses__grid">
             {filteredCourses.map((course) => (
               <TeacherCourseCard
                 key={course.courseId}
@@ -89,7 +90,7 @@ const Courses = () => {
                 isOwner={course.teacherId === user?.id}
               />
             ))}
-          </div> */}
+          </div>
         </div>
       );
 };

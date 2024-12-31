@@ -24,7 +24,7 @@ export const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
-    setSections: (state, action: PayloadAction<Section[]>) => {
+    setSections: (state, action: PayloadAction<Section[]>) => { // replace old info with new ones with setsections
       state.courseEditor.sections = action.payload;
     },
     openChapterModal: (

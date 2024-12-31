@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import Course from "../models/courseModel";
 import { v4 as uuidv4 } from "uuid";
 import { getAuth } from "@clerk/express";
-import { title } from "process";
 
 export const listCourses = async (
   req: Request,
