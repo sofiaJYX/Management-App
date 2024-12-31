@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/src/components/ui/avatar";
 import ReactPlayer from "react-player";
-import Loading from "@/components/Loading";
+import Loading from "@/src/components/Loading";
 import { useCourseProgressData } from "@/src/hooks/useCourseProgressData";
 
 const Course = () => {
